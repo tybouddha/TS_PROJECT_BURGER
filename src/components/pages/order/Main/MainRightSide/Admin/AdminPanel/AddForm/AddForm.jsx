@@ -5,11 +5,14 @@ import { useSuccessMessage } from "../../../../../../../../hooks/useSuccessMessa
 import { replaceFrenchCommaWithDot } from "../../../../../../../../utils/maths"
 import Form from "../Form/Form"
 import SubmitButton from "./SubmitButton"
+import { useParams } from "react-router-dom"
 
 export default function AddForm() {
   // state
-  const { username, handleAdd, newProduct, setNewProduct } = useOrderContext()
+  const { handleAdd, newProduct, setNewProduct } = useOrderContext()
   const { isSubmitted, displaySuccessMessage } = useSuccessMessage()
+
+  const { username } = useParams()
 
   // comportements
   const handleSubmit = (event) => {

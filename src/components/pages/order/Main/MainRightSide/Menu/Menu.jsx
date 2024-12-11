@@ -13,10 +13,10 @@ import { CSSTransition, TransitionGroup } from "react-transition-group"
 import { menuAnimation } from "../../../../../../theme/animations"
 import { convertStringToBoolean } from "../../../../../../utils/string"
 import RibbonAnimated, { ribbonAnimation } from "./RibbonAnimated"
+import { useParams } from "react-router-dom"
 
 export default function Menu() {
   const {
-    username,
     menu,
     isModeAdmin,
     handleDelete,
@@ -28,6 +28,8 @@ export default function Menu() {
     handleProductSelected,
   } = useOrderContext()
   // state
+
+  const { username } = useParams()
 
   // comportements (gestionnaires d'événement ou "event handlers")
   const handleCardDelete = (event, idProductToDelete) => {

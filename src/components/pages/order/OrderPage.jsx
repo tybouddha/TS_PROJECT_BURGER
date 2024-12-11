@@ -2,21 +2,28 @@ import styled from "styled-components"
 import { theme } from "../../../theme"
 import Main from "./Main/Main"
 import Navbar from "./Navbar/Navbar"
-import { OrderContextProvider } from "../../../context/OrderContext"
+import { initialiseUserSession } from "./helpers/initialiseUserSession"
+import { useEffect } from "react"
+import { useParams } from "react-router-dom"
+import { useOrderContext } from "../../../context/OrderContext"
 
 export default function OrderPage() {
   // state
+  const { username } = useParams()
+  const { setMenu, setBasket } = useOrderContext()
+
+  useEffect(() => {
+    initialiseUserSession(username, setMenu, setBasket)
+  }, [])
 
   //affichage (render)
   return (
-    <OrderContextProvider>
-      <OrderPageStyled>
-        <div className="container">
-          <Navbar />
-          <Main />
-        </div>
-      </OrderPageStyled>
-    </OrderContextProvider>
+    <OrderPageStyled>
+      <div className="container">
+        <Navbar />
+        <Main />
+      </div>
+    </OrderPageStyled>
   )
 }
 

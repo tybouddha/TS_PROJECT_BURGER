@@ -10,10 +10,10 @@ import { basketAnimation } from "../../../../../../theme/animations"
 import { formatPrice } from "../../../../../../utils/maths"
 import { convertStringToBoolean } from "../../../../../../utils/string"
 import Sticker from "../../../../../reusable-ui/Sticker"
+import { useParams } from "react-router-dom"
 
 export default function BasketProducts() {
   const {
-    username,
     basket,
     isModeAdmin,
     handleDeleteBasketProduct,
@@ -21,6 +21,8 @@ export default function BasketProducts() {
     handleProductSelected,
     productSelected,
   } = useOrderContext()
+
+  const { username } = useParams()
 
   const handleOnDelete = (event, id) => {
     event.stopPropagation()

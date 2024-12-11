@@ -1,10 +1,8 @@
-import { createContext, useContext, useEffect, useRef, useState } from "react"
+import { createContext, useContext, useRef, useState } from "react"
 import { useMenu } from "../hooks/useMenu"
 import { useBasket } from "../hooks/useBasket"
 import { findObjectById } from "../utils/array"
 import { EMPTY_PRODUCT } from "../enums/product"
-import { useParams } from "react-router-dom"
-import { initialiseUserSession } from "../components/pages/order/helpers/initialiseUserSession"
 
 // 1. Création du context
 const OrderContext = createContext({
@@ -48,7 +46,6 @@ export const OrderContextProvider = ({ children }) => {
   const titleEditRef = useRef()
   const { menu, setMenu, handleAdd, handleDelete, handleEdit, resetMenu } = useMenu()
   const { basket, setBasket, handleAddToBasket, handleDeleteBasketProduct } = useBasket()
-  const { username } = useParams()
 
   const handleProductSelected = async (idProductClicked) => {
     const productClickedOn = findObjectById(idProductClicked, menu)
@@ -58,12 +55,7 @@ export const OrderContextProvider = ({ children }) => {
     titleEditRef.current.focus()
   }
 
-  useEffect(() => {
-    initialiseUserSession(username, setMenu, setBasket)
-  }, [])
-
   const orderContextValue = {
-    username,
     isModeAdmin,
     setIsModeAdmin,
     isCollapsed,
@@ -71,6 +63,7 @@ export const OrderContextProvider = ({ children }) => {
     currentTabSelected,
     setCurrentTabSelected,
     menu,
+    setMenu,
     handleAdd,
     handleDelete,
     resetMenu,
@@ -81,6 +74,7 @@ export const OrderContextProvider = ({ children }) => {
     handleEdit,
     titleEditRef,
     basket,
+    setBasket,
     handleAddToBasket,
     handleDeleteBasketProduct,
     handleProductSelected,

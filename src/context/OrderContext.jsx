@@ -1,4 +1,4 @@
-import { createContext, useEffect, useRef, useState } from "react"
+import { createContext, useContext, useEffect, useRef, useState } from "react"
 import { useMenu } from "../hooks/useMenu"
 import { useBasket } from "../hooks/useBasket"
 import { findObjectById } from "../utils/array"
@@ -38,10 +38,7 @@ const OrderContext = createContext({
   handleDeleteBasketProduct: () => {},
 })
 
-export default OrderContext
-
 // 2. Installation du context
-
 export const OrderContextProvider = ({ children }) => {
   const [isModeAdmin, setIsModeAdmin] = useState(false)
   const [isCollapsed, setIsCollapsed] = useState(false)
@@ -93,3 +90,4 @@ export const OrderContextProvider = ({ children }) => {
 }
 
 // 3. Consommation du context
+export const useOrderContext = () => useContext(OrderContext)

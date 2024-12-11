@@ -1,13 +1,12 @@
 import styled from "styled-components"
 import Profile from "./Profile"
 import ToggleButton from "../../../reusable-ui/ToggleButton"
-import { useContext } from "react"
 import ToastAdmin from "./ToastAdmin"
 import { toast } from "react-toastify"
-import OrderContext from "../../../../context/OrderContext"
+import { useOrderContext } from "../../../../context/OrderContext"
 
 export default function NavbarRightSide() {
-  const { isModeAdmin, setIsModeAdmin } = useContext(OrderContext)
+  const { isModeAdmin, setIsModeAdmin } = useOrderContext()
 
   const displayToastNotification = () => {
     if (!isModeAdmin) {

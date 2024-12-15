@@ -6,7 +6,7 @@
 yarn install
 ```
 
-## 2. Pour connecter le projet au backend firebase, créer le fichier .env à la racine du projet avec les valeurs suivantes (demander à Vi les valeurs) :
+## 2. Pour connecter le projet au backend firebase, créer le fichier .env à la racine du projet avec les valeurs de ta base de données Firestore existante :
 
 Si projet initilisé avec CRA (create-react-app) :
 
@@ -36,7 +36,7 @@ firebase-config.js > ces variables d'environnement seront consommés via import.
 
 P.S. Sans ça, tu ne pourras pas accéder à la page de commande avec les bonnes valeurs du compte client. Tu seras bloqué à la page de Login.
 
-## 3. Pour lancer le projet
+## 3. Pour lancer le projet :
 
 ```
 yarn dev

@@ -1,17 +1,15 @@
-import { getMenu } from "../../../../api/product"
-import { getLocalStorage } from "../../../../utils/window"
-
-const intialiseMenu = async (username, setMenu) => {
-  const menuReceived = await getMenu(username)
-  setMenu(menuReceived)
-}
-
-const intialiseBasket = (username, setBasket) => {
-  const basketReceived = getLocalStorage(username) // localStorage est synchrone, pas besoin de "await".
-  if (basketReceived) setBasket(basketReceived)
-}
+import { authenticateUser } from "../../../../api/user";
+import { getLocalStorage } from "../../../../utils/window";
 
 export const initialiseUserSession = async (username, setMenu, setBasket) => {
-  await intialiseMenu(username, setMenu)
-  intialiseBasket(username, setBasket)
-}
+  // S'assurer que l'utilisateur existe dans la base de données
+  const userReceived = await authenticateUser(username);
+
+  if (userReceived && userReceived.menu) {
+    setMenu(userReceived.menu);
+  }
+
+  // Initialiser le panier depuis le localStorage
+  const basketReceived = getLocalStorage(username);
+  if (basketReceived) setBasket(basketReceived);
+};

@@ -1,30 +1,25 @@
 {
   "compilerOptions": {
-    "target": "ES2020",
-    "useDefineForClassFields": true,
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
-    "module": "ESNext",
-    "skipLibCheck": true,
-
-    /* Bundler mode */
-    "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
-    "isolatedModules": true,
-    "moduleDetection": "force",
-    "noEmit": true,
+    "target": "ESNext", // Spécifie la version ECMAScript à utiliser (ESNext pour la plus récente)
+    "lib": ["DOM", "DOM.Iterable", "ESNext"], // Spécifie les bibliothèques (DOM, DOM.Iterable et ESNext) disponibles
+    "allowJs": true, // Permet l'importation et la compilation de fichiers JavaScript
+    "skipLibCheck": true, // Ignore la vérification des types dans les fichiers de définition de bibliothèques
+    "esModuleInterop": true, // Facilite l'importation des modules CommonJS mais on s'en moque auj car on n'utilise plus CommonJS mais ESNext avec "import" et "export" pour gérer les imports et les export de modules.
+    "allowSyntheticDefaultImports": true, // Permet d'importer des modules CommonJS avec la syntaxe import ES6 moderne
+    "strict": true, // Active le mode strict, ce qui active toutes les vérifications strictes de TypeScript
+    "forceConsistentCasingInFileNames": true, // Enforce la cohérence de la casse dans les noms de fichiers d'import/export
+    "module": "ESNext", // Utilise le système de modules ESNext (le plus récent) vs CommonJS avant à l'éééééépoque avant ECMAScript 5 et +.
+    "moduleResolution": "Node", // Utilise la résolution de modules à la manière de Node.js
+    "isolatedModules": true, // Compile chaque fichier comme un module individuel, nécessaire pour le mode JSX
+    "resolveJsonModule": true, // Permet l'importation de fichiers JSON dans TypeScript
     "jsx": "react-jsx", // Utilise le support JSX avec React (React 17+ n'a plus besoin d'import explicite de React)
-
-    /* Linting */
-    "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noEmit": true, // Empêche la sortie des fichiers de compilation (utile pour des outils comme Babel)
+    "incremental": true // Active les builds incrémentaux pour accélérer les recompilations
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "build", "dist"]
+  "include": ["src/**/*"], // Inclut tous les fichiers dans le dossier "src" pour la compilation
+  "exclude": ["node_modules", "build", "dist"] // Exclut les dossiers node_modules, build et dist de la compilation
 }
 
-// ci dessous généré automatiquement avec la commande npx tsc --init mais le problème c'est que y'a pas les règles intéressantes sélectionnées par défaut.
 // {
 //   "compilerOptions": {
 //     /* Visit https://aka.ms/tsconfig to read more about this file */
@@ -63,6 +58,7 @@
 //     // "allowUmdGlobalAccess": true,                     /* Allow accessing UMD globals from modules. */
 //     // "moduleSuffixes": [],                             /* List of file name suffixes to search when resolving a module. */
 //     // "allowImportingTsExtensions": true,               /* Allow imports to include TypeScript file extensions. Requires '--moduleResolution bundler' and either '--noEmit' or '--emitDeclarationOnly' to be set. */
+//     // "rewriteRelativeImportExtensions": true,          /* Rewrite '.ts', '.tsx', '.mts', and '.cts' file extensions in relative import paths to their JavaScript equivalent in output files. */
 //     // "resolvePackageJsonExports": true,                /* Use the package.json 'exports' field when resolving package imports. */
 //     // "resolvePackageJsonImports": true,                /* Use the package.json 'imports' field when resolving imports. */
 //     // "customConditions": [],                           /* Conditions to set in addition to the resolver-specific defaults when resolving imports. */

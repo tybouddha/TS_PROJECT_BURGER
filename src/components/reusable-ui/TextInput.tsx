@@ -1,28 +1,16 @@
-import React from "react";
+import React, { ComponentPropsWithRef } from "react";
 import styled, { css } from "styled-components";
 import { theme } from "../../theme/theme";
 
 type TextInputVersionType = "normal" | "minimalist";
 
 type TextInputPropsType = {
-  onChange?: React.ChangeEventHandler<HTMLInputElement>;
   Icon: JSX.Element;
-  className?: string;
   version?: TextInputVersionType;
-  //  ...extraProps: unknown
-};
+} & ComponentPropsWithRef<"input">;
 
 const TextInput = React.forwardRef<HTMLInputElement, TextInputPropsType>(
-  (
-    {
-      onChange,
-      Icon,
-      className,
-      version = "normal",
-      ...extraProps
-    }: TextInputPropsType,
-    ref
-  ) => {
+  ({ onChange, Icon, className, version = "normal", ...extraProps }, ref) => {
     return (
       <TextInputStyled className={className} version={version}>
         <div className="icon">{Icon && Icon}</div>

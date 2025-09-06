@@ -14,7 +14,11 @@
     "resolveJsonModule": true, // Permet l'importation de fichiers JSON dans TypeScript
     "jsx": "react-jsx", // Utilise le support JSX avec React (React 17+ n'a plus besoin d'import explicite de React)
     "noEmit": true, // Empêche la sortie des fichiers de compilation (utile pour des outils comme Babel)
-    "incremental": true // Active les builds incrémentaux pour accélérer les recompilations
+    "incremental": true, // Active les builds incrémentaux pour accélérer les recompilations
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"] //ne fonctionne qu'à partir de fichier typescript (.ts et .tsx) pour importer des modules typescript (.ts et .tsx)
+    }
   },
   "include": ["src/**/*"], // Inclut tous les fichiers dans le dossier "src" pour la compilation
   "exclude": ["node_modules", "build", "dist"] // Exclut les dossiers node_modules, build et dist de la compilation

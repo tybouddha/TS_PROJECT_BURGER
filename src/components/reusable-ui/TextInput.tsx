@@ -1,20 +1,31 @@
-import React from "react"
-import styled, { css } from "styled-components"
-import { theme } from "../../theme"
+import React, { ComponentPropsWithRef } from "react";
+import styled, { css } from "styled-components";
+import { theme } from "@/theme/theme";
 
-const TextInput = React.forwardRef(
+type TextInputVersionType = "normal" | "minimalist";
+
+type TextInputPropsType = {
+  Icon: JSX.Element;
+  version?: TextInputVersionType;
+} & ComponentPropsWithRef<"input">;
+
+const TextInput = React.forwardRef<HTMLInputElement, TextInputPropsType>(
   ({ onChange, Icon, className, version = "normal", ...extraProps }, ref) => {
     return (
       <TextInputStyled className={className} version={version}>
         <div className="icon">{Icon && Icon}</div>
         <input ref={ref} onChange={onChange} type="text" {...extraProps} />
       </TextInputStyled>
-    )
+    );
   }
-)
+);
 
-export default TextInput
-const TextInputStyled = styled.div`
+type TextInputStyledPropsType = {
+  version: TextInputVersionType;
+};
+
+export default TextInput;
+const TextInputStyled = styled.div<TextInputStyledPropsType>`
   border-radius: ${theme.borderRadius.round};
   display: flex;
   align-items: center;
@@ -36,12 +47,12 @@ const TextInputStyled = styled.div`
   }
 
   /* ${(props) => {
-    if (props.version === "normal") return extraStyleNormal
-    if (props.version === "minimalist") return extraStyleMinimalist
+    if (props.version === "normal") return extraStyleNormal;
+    if (props.version === "minimalist") return extraStyleMinimalist;
   }} */
 
   ${({ version }) => extraStyle[version]}
-`
+`;
 
 const extraStyleNormal = css`
   background-color: ${theme.colors.white};
@@ -55,7 +66,7 @@ const extraStyleNormal = css`
       background: ${theme.colors.white};
     }
   }
-`
+`;
 
 const extraStyleMinimalist = css`
   background-color: ${theme.colors.background_white};
@@ -70,9 +81,9 @@ const extraStyleMinimalist = css`
       outline: 0; //// add outline
     }
   }
-`
+`;
 
 const extraStyle = {
   normal: extraStyleNormal,
   minimalist: extraStyleMinimalist,
-}
+};

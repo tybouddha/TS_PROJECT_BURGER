@@ -1,8 +1,15 @@
-import React from "react"
-import { TransitionGroup, CSSTransition } from "react-transition-group"
-import styled from "styled-components"
+import { TransitionGroup, CSSTransition } from "react-transition-group";
+import styled from "styled-components";
 
-export default function CasinoEffect({ count, className }) {
+type CasinoEffectPropsType = {
+  count: string;
+  className?: string;
+};
+
+export default function CasinoEffect({
+  count,
+  className,
+}: CasinoEffectPropsType) {
   return (
     <TransitionGroup
       component={CasinoEffectStyled}
@@ -12,7 +19,7 @@ export default function CasinoEffect({ count, className }) {
         <span className={className}>{count}</span>
       </CSSTransition>
     </TransitionGroup>
-  )
+  );
 }
 
 const CasinoEffectStyled = styled.div`
@@ -45,4 +52,4 @@ const CasinoEffectStyled = styled.div`
     transform: translateY(-100%);
     transition: 300ms;
   }
-`
+`;

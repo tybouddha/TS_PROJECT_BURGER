@@ -5,7 +5,7 @@ import { ComponentProps } from "react";
 type ButtonVersionType = "normal" | "success";
 
 type ButtonType = {
-  Icon: JSX.Element;
+  Icon?: JSX.Element;
   version?: ButtonVersionType;
   label: string;
 } & ComponentProps<"button">;

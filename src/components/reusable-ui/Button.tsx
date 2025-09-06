@@ -1,18 +1,43 @@
-import styled, { css } from "styled-components"
-import { theme } from "../../theme"
+import styled, { css } from "styled-components";
+import { theme } from "@/theme/theme";
+import { ComponentProps } from "react";
 
-export default function Button({ label, Icon, className, version = "normal", onClick, disabled }) {
+type ButtonVersionType = "normal" | "success";
+
+type ButtonType = {
+  Icon?: JSX.Element;
+  version?: ButtonVersionType;
+  label: string;
+} & ComponentProps<"button">;
+
+export default function Button({
+  label,
+  Icon,
+  className,
+  version = "normal",
+  onClick,
+  disabled,
+}: ButtonType) {
   return (
-    <ButtonStyled className={className} version={version} onClick={onClick} disabled={disabled}>
+    <ButtonStyled
+      className={className}
+      version={version}
+      onClick={onClick}
+      disabled={disabled}
+    >
       <span>{label}</span>
       <div className="icon">{Icon && Icon}</div>
     </ButtonStyled>
-  )
+  );
 }
 
-const ButtonStyled = styled.button`
+type ButtonStyledPropsType = {
+  version: ButtonVersionType;
+};
+
+const ButtonStyled = styled.button<ButtonStyledPropsType>`
   ${({ version }) => extraStyle[version]};
-`
+`;
 
 const extraStyleNormal = css`
   width: 100%;
@@ -71,7 +96,7 @@ const extraStyleNormal = css`
     justify-content: center;
     align-items: center;
   }
-`
+`;
 
 const extraStyleSuccess = css`
   cursor: pointer;
@@ -92,8 +117,8 @@ const extraStyleSuccess = css`
     background: ${theme.colors.success};
     border: 1px solid ${theme.colors.success};
   }
-`
+`;
 const extraStyle = {
   normal: extraStyleNormal,
   success: extraStyleSuccess,
-}
+};

@@ -6,10 +6,10 @@ import {
   removeObjectById,
 } from "../utils/array";
 import { setLocalStorage } from "@/utils/window";
-import { BasketProductType } from "@/types/Product";
+import { BasketProductQuantityType } from "@/types/Product";
 
 export const useBasket = () => {
-  const [basket, setBasket] = useState<BasketProductType[]>([]);
+  const [basket, setBasket] = useState<BasketProductQuantityType[]>([]);
 
   const handleAddToBasket = (idProductToAdd: string, username: string) => {
     const basketCopy = deepClone(basket);
@@ -25,7 +25,7 @@ export const useBasket = () => {
 
   const incrementProductAlreadyInBasket = (
     idProductToAdd: string,
-    basketCopy: BasketProductType[],
+    basketCopy: BasketProductQuantityType[],
     username: string
   ) => {
     const indexOfBasketProductToIncrement = findIndexById(
@@ -39,8 +39,10 @@ export const useBasket = () => {
 
   const createNewBasketProduct = (
     idProductToAdd: string,
-    basketCopy: BasketProductType[],
-    setBasket: React.Dispatch<React.SetStateAction<BasketProductType[]>>,
+    basketCopy: BasketProductQuantityType[],
+    setBasket: React.Dispatch<
+      React.SetStateAction<BasketProductQuantityType[]>
+    >,
     username: string
   ) => {
     // we do not re-create a whole product, we only add the extra info a basket product has in comparison to a menu product

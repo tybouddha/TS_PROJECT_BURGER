@@ -8,7 +8,7 @@ export const useMenu = () => {
   const [menu, setMenu] = useState<MenuProductType[]>([]);
 
   // comportements (gestionnaire de state ou "state handlers")
-  const handleAdd = (newProduct: MenuProductType[], username: string) => {
+  const handleAdd = (newProduct: MenuProductType, username: string) => {
     // 1. copie du tableau
     const menuCopy = deepClone(menu);
 
@@ -35,7 +35,10 @@ export const useMenu = () => {
     syncBothMenus(username, menuUpdated);
   };
 
-  const handleEdit = (productBeingEdited, username: string) => {
+  const handleEdit = (
+    productBeingEdited: MenuProductType,
+    username: string
+  ) => {
     // 1. copie du state (deep clone)
     const menuCopy = deepClone(menu);
 

@@ -4,7 +4,7 @@ import {
   findObjectById,
   findIndexById,
   removeObjectById,
-} from "../utils/array";
+} from "@/utils/array";
 import { setLocalStorage } from "@/utils/window";
 import { BasketProductQuantityType } from "@/types/Product";
 

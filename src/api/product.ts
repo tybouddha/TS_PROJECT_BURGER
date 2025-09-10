@@ -1,23 +1,29 @@
-import { doc, getDoc, setDoc } from "firebase/firestore"
-import { db } from "./firebase-config"
+import { doc, getDoc, setDoc } from "firebase/firestore";
+import { db } from "./firebase-config";
+import { MenuProductType } from "@/types/Product";
 
-export const syncBothMenus = (userId, menuUpdated) => {
-  const cachette = doc(db, "users", userId)
+export const syncBothMenus = (
+  userId: string,
+  menuUpdated: MenuProductType[]
+) => {
+  const cachette = doc(db, "users", userId);
 
   const nourriture = {
     username: userId,
     menu: menuUpdated,
-  }
-  setDoc(cachette, nourriture)
-}
+  };
+  setDoc(cachette, nourriture);
+};
 
-export const getMenu = async (idUser) => {
+export const getMenu = async (
+  idUser: string
+): Promise<MenuProductType[] | undefined> => {
   //const docRef = doc(CHEMIN)
-  const docRef = doc(db, "users", idUser)
+  const docRef = doc(db, "users", idUser);
 
-  const docSnapshot = await getDoc(docRef)
+  const docSnapshot = await getDoc(docRef);
   if (docSnapshot.exists()) {
-    const { menu } = docSnapshot.data()
-    return menu
+    const { menu } = docSnapshot.data();
+    return menu as MenuProductType[];
   }
-}
+};

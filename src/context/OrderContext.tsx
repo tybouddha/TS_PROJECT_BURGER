@@ -9,40 +9,39 @@ import { useMenu } from "@/hooks/useMenu";
 import { useBasket } from "@/hooks/useBasket";
 import { findObjectById } from "@/utils/array";
 import { EMPTY_PRODUCT } from "@/enums/product";
-// import { AdminTabValueType } from "@/types/Tab";
 import { AdminTabEnum } from "@/enums/tab";
+import { BasketProductQuantityType, MenuProductType } from "@/types/Product";
+
+type OrderContextType = {
+  isModeAdmin: boolean;
+  setIsModeAdmin: React.Dispatch<React.SetStateAction<boolean>>;
+  isCollapsed: boolean;
+  setIsCollapsed: React.Dispatch<React.SetStateAction<boolean>>;
+  currentTabSelected: AdminTabEnum;
+  setCurrentTabSelected: React.Dispatch<React.SetStateAction<AdminTabEnum>>;
+  menu: MenuProductType[] | undefined;
+  setMenu: React.Dispatch<React.SetStateAction<MenuProductType[]>>;
+  handleAdd: (newProduct: MenuProductType, username: string) => void;
+  handleDelete: (idOfProductToDelete: string, username: string) => void;
+  resetMenu: (username: string) => void;
+  newProduct: MenuProductType;
+  setNewProduct: React.Dispatch<React.SetStateAction<MenuProductType>>;
+  productSelected: MenuProductType;
+  setProductSelected: React.Dispatch<React.SetStateAction<MenuProductType>>;
+  handleEdit: (productBeingEdited: MenuProductType, username: string) => void;
+  titleEditRef: React.RefObject<HTMLInputElement>;
+  basket: BasketProductQuantityType[];
+  setBasket: React.Dispatch<React.SetStateAction<BasketProductQuantityType[]>>;
+  handleAddToBasket: (idProductToAdd: string, username: string) => void;
+  handleDeleteBasketProduct: (
+    idBasketProduct: string,
+    username: string
+  ) => void;
+  handleProductSelected: (idProductClicked: string) => Promise<void>;
+};
 
 // 1. Création du context
-const OrderContext = createContext({
-  username: "",
-  isModeAdmin: false,
-  setIsModeAdmin: () => {},
-
-  isCollapsed: false,
-  setIsCollapsed: () => {},
-
-  currentTabSelected: false,
-  setCurrentTabSelected: () => {},
-
-  menu: [],
-  handleAdd: () => {},
-  handleDelete: () => {},
-  handleEdit: () => {},
-  resetMenu: () => {},
-
-  newProduct: {},
-  setNewProduct: () => {},
-
-  productSelected: {},
-  setProductSelected: () => {},
-  handleProductSelected: () => {},
-
-  titleEditRef: {},
-
-  basket: [],
-  handleAddToBasket: () => {},
-  handleDeleteBasketProduct: () => {},
-});
+const OrderContext = createContext<OrderContextType | undefined>(undefined);
 
 // 2. Installation du context
 export const OrderContextProvider = ({ children }: PropsWithChildren) => {

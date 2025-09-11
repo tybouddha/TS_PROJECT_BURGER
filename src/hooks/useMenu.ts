@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { fakeMenu } from "@/fakeData/fakeMenu";
 import { deepClone } from "@/utils/array";
-import { syncBothMenus } from "../api/product";
+import { syncBothMenus } from "@/api/product";
 import { MenuProductType } from "@/types/Product";
 
 export const useMenu = () => {
@@ -9,6 +9,7 @@ export const useMenu = () => {
 
   // comportements (gestionnaire de state ou "state handlers")
   const handleAdd = (newProduct: MenuProductType, username: string) => {
+    if (!menu) return;
     // 1. copie du tableau
     const menuCopy = deepClone(menu);
 
@@ -21,6 +22,7 @@ export const useMenu = () => {
   };
 
   const handleDelete = (idOfProductToDelete: string, username: string) => {
+    if (!menu) return;
     //1. copy du state
     const menuCopy = deepClone(menu);
 
@@ -39,6 +41,7 @@ export const useMenu = () => {
     productBeingEdited: MenuProductType,
     username: string
   ) => {
+    if (!menu) return;
     // 1. copie du state (deep clone)
     const menuCopy = deepClone(menu);
 

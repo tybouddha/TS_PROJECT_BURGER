@@ -1,11 +1,11 @@
 import styled from "styled-components";
-import { theme } from "../../../theme";
+import { theme } from "@/theme/theme";
 import Main from "./Main/Main";
 import Navbar from "./Navbar/Navbar";
 import { initialiseUserSession } from "./helpers/initialiseUserSession";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { useOrderContext } from "../../../context/OrderContext";
+import { useOrderContext } from "@/context/OrderContext";
 
 export default function OrderPage() {
   // state

@@ -1,10 +1,12 @@
-//@ts-nocheck
-import React from "react";
 import styled from "styled-components";
-import { theme } from "../../../../../../theme";
-import { BASKET_MESSAGE } from "../../../../../../enums/product";
+import { theme } from "@/theme/theme";
+import { BASKET_MESSAGE } from "@/enums/product";
 
-export default function EmptyBasket({ isLoading }) {
+type EmptyBasketPropsType = {
+  isLoading: boolean;
+};
+
+export default function EmptyBasket({ isLoading }: EmptyBasketPropsType) {
   return (
     <EmptyBasketStyled>
       <span className="empty-message">

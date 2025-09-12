@@ -8,7 +8,7 @@ import CasinoEffect from "@/components/reusable-ui/CasinoEffect";
 
 export default function BasketHeader() {
   const { basket, menu } = useOrderContext();
-  if (menu === undefined) return;
+
   const sumToPay = calculateSumToPay(basket, menu);
 
   return (

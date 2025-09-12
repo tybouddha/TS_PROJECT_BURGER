@@ -28,14 +28,3 @@ export const removeObjectById = <T extends { id: string }>(
 export const isEmpty = <T>(array: T[]): boolean => {
   return array.length === 0;
 };
-
-// const fruits = [{ nom: "Abricot" }, { nom: "Banane" }]
-// const fruitsShallowCopy = [...fruits]
-// const fruitsDeepCopy = deepClone(fruits)
-
-// //fruitsShallowCopy[1].nom = "Cerise"
-// fruitsDeepCopy[1].nom = "Cerise"
-
-// console.log("fruits: ", fruits)
-// //console.log("fruitsShallowCopy: ", fruitsShallowCopy)
-// console.log("fruitsDeepCopy: ", fruitsDeepCopy)

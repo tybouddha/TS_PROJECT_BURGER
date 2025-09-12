@@ -1,17 +1,17 @@
-import { ToastContainer } from "react-toastify"
-import "react-toastify/dist/ReactToastify.css"
-import styled from "styled-components"
-import { theme } from "../../../../theme"
+import "react-toastify/dist/ReactToastify.css";
+import { theme } from "@/theme/theme";
+import { ToastContainer } from "react-toastify";
+import styled from "styled-components";
 
-export default function ToastAdmin() {
+export default function NavbarRightSideIncomplet() {
   return (
-    <ToastAdminStyled>
+    <NavbarRightSideIncompletStyled>
       <ToastContainer className="toaster" bodyClassName="body-toast" />
-    </ToastAdminStyled>
-  )
+    </NavbarRightSideIncompletStyled>
+  );
 }
 
-const ToastAdminStyled = styled.div`
+const NavbarRightSideIncompletStyled = styled.div`
   .toaster {
     max-width: 300px;
   }
@@ -29,4 +29,4 @@ const ToastAdminStyled = styled.div`
       line-height: 1.3em;
     }
   }
-`
+`;

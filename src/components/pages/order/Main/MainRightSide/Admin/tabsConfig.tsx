@@ -22,7 +22,7 @@ export const getTabsConfig = (hasAlreadyBeenClicked?: boolean): TabType[] => [
 ];
 
 export const getTabSelected = (
-  tabs: TabType,
+  tabs: TabType[],
   currentTabSelected: AdminTabEnum
 ) => {
   return tabs.find((tab) => tab.index === currentTabSelected);

@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { getInputTextsConfig, getSelectInputConfig } from "./inputConfig";
 import { MenuProductType } from "@/types/Product";
 
-type InputsPropsType = {
+export type InputsPropsType = {
   product: MenuProductType;
   onChange?: React.ChangeEventHandler<HTMLInputElement | HTMLSelectElement>;
   onFocus?: React.FocusEventHandler<HTMLInputElement | HTMLSelectElement>;

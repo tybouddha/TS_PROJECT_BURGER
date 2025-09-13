@@ -41,16 +41,21 @@ export default function BasketProducts() {
       : BASKET_MESSAGE.NOT_AVAILABLE;
   };
 
+  //(props: TransitionGroupProps<"div", any>): TransitionGroup
+  //Type 'undefined' is not assignable to type 'ReactElement<TransitionProps<any>, string | JSXElementConstructor<any>>'.
+
+  //(props: TransitionGroupProps<"div", any>, context: any): TransitionGroup'
+  // Type 'undefined' is not assignable to type 'ReactElement<TransitionProps<any>, string | JSXElementConstructor<any>>'.ts(2769)
+
   return (
-    //@ts-expect-error
     <TransitionGroup
       component={BasketProductsStyled}
       className={"transition-group"}
     >
       {basket.map((basketProduct) => {
-        if (menu === undefined) return;
+        if (menu === undefined) return <></>;
         const menuProduct = findObjectById(basketProduct.id, menu);
-        if (!menuProduct) return;
+        if (!menuProduct) return <></>;
         return (
           <CSSTransition
             appear={true}

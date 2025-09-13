@@ -1,7 +1,5 @@
 import { AdminTabEnum } from "@/enums/tab";
 
-// export type AdminTabValueType = "add" | "edit" | "chevron";
-
 export type TabType = {
   index: AdminTabEnum;
   label: string;

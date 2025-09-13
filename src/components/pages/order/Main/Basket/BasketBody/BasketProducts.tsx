@@ -10,7 +10,6 @@ import { formatPrice } from "@/utils/maths";
 import { convertStringToBoolean } from "@/utils/string";
 import { useParams } from "react-router-dom";
 import { MenuProductType } from "@/types/Product";
-import { ReactElement } from "react";
 
 export default function BasketProducts() {
   const {
@@ -30,10 +29,6 @@ export default function BasketProducts() {
   ) => {
     event.stopPropagation();
     username && handleDeleteBasketProduct(id, username);
-  };
-
-  const handleClickCard = (isModeAdmin: boolean, basketProductId: string) => {
-    isModeAdmin && handleProductSelected(basketProductId);
   };
 
   const getPrice = (menuProduct: MenuProductType) => {
@@ -70,7 +65,7 @@ export default function BasketProducts() {
                   quantity={basketProduct.quantity}
                   onDelete={(event) => handleOnDelete(event, basketProduct.id)}
                   isClickable={isModeAdmin}
-                  onClick={() => handleClickCard(isModeAdmin, basketProduct.id)}
+                  onClick={() => handleProductSelected(basketProduct.id)}
                   isSelected={checkIfProductIsClicked(
                     basketProduct.id,
                     productSelected.id

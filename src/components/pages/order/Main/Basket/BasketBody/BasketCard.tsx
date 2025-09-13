@@ -6,7 +6,7 @@ import Sticker from "@/components/reusable-ui/Sticker";
 
 type BasketCardPropsType = {
   title: string;
-  price: number;
+  price: string;
   quantity: number;
   imageSource: string;
   className?: string;

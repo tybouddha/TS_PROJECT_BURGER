@@ -20,7 +20,7 @@ type OrderContextType = {
   currentTabSelected: AdminTabEnum;
   setCurrentTabSelected: React.Dispatch<React.SetStateAction<AdminTabEnum>>;
   menu: MenuProductType[] | undefined;
-  setMenu: React.Dispatch<React.SetStateAction<MenuProductType[]>>;
+  setMenu: React.Dispatch<React.SetStateAction<MenuProductType[] | undefined>>;
   handleAdd: (newProduct: MenuProductType, username: string) => void;
   handleDelete: (idOfProductToDelete: string, username: string) => void;
   resetMenu: (username: string) => void;
@@ -61,7 +61,7 @@ export const OrderContextProvider = ({ children }: PropsWithChildren) => {
   const handleProductSelected = async (idProductClicked: string) => {
     if (!menu) return;
     const productClickedOn = findObjectById(idProductClicked, menu);
-    if (productClickedOn === undefined) return;
+    if (!productClickedOn) return;
     await setIsCollapsed(false);
     await setCurrentTabSelected(AdminTabEnum.EDIT);
     await setProductSelected(productClickedOn);

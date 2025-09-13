@@ -17,3 +17,5 @@ export const BASKET_MESSAGE = {
   LOADING: "Chargement en cours...",
   NOT_AVAILABLE: "Non disponible",
 } as const;
+
+export const DEFAULT_SUM_TO_PAY = 0;

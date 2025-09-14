@@ -1,7 +1,11 @@
 import Button from "@/components/reusable-ui/Button";
 import SubmitMessage from "./SubmitMessage";
 
-export default function SubmitButton({ isSubmitted }) {
+type SubmitButtonPropsType = {
+  isSubmitted: boolean;
+};
+
+export default function SubmitButton({ isSubmitted }: SubmitButtonPropsType) {
   return (
     <>
       <Button

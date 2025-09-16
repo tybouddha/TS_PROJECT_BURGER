@@ -8,20 +8,29 @@ import Button from "@/components/reusable-ui/Button";
 import { theme } from "@/theme/theme";
 import { authenticateUser } from "@/api/user";
 import Welcome from "./Welcome";
+import { BiLoader } from "react-icons/bi";
 
 export default function LoginForm() {
   // state
   const [username, setUsername] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
   const navigate = useNavigate();
 
   // comportements
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const userReceived = await authenticateUser(username);
+    if (isLoading) return;
 
+    setIsLoading(true);
+
+    const userReceived = await authenticateUser(username);
+    await new Promise((resolve) => setTimeout(resolve, 2000));
     setUsername("");
     navigate(`order/${userReceived.username}`);
+
+    setIsLoading(false);
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -41,9 +50,17 @@ export default function LoginForm() {
           Icon={<BsPersonCircle />}
           className="input-login"
           version="normal"
+          disabled={isLoading}
         />
 
-        <Button label={"Accéder à mon espace"} Icon={<IoChevronForward />} />
+        <Button
+          label="Accéder à mon espace"
+          Icon={<IoChevronForward />}
+          LoadingIcon={<BiLoader />}
+          disabled={isLoading}
+          isLoading={isLoading}
+          loaderDelay={500}
+        />
       </div>
     </LoginFormStyled>
   );

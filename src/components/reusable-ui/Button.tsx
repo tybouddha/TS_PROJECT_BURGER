@@ -1,32 +1,64 @@
-import styled, { css } from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 import { theme } from "@/theme/theme";
-import { ComponentProps } from "react";
+import { ComponentProps, useEffect, useState } from "react";
 
 type ButtonVersionType = "normal" | "success";
 
 type ButtonType = {
   Icon?: JSX.Element;
+  LoadingIcon?: JSX.Element;
   version?: ButtonVersionType;
   label: string;
+  isLoading?: boolean;
+  loaderDelay?: number;
 } & ComponentProps<"button">;
+
+const Spinner = () => <SpinnerStyled />;
 
 export default function Button({
   label,
   Icon,
+  LoadingIcon,
   className,
   version = "normal",
   onClick,
   disabled,
+  isLoading = false,
+  loaderDelay = 500,
 }: ButtonType) {
+  const [showLoader, setShowLoader] = useState(false);
+
+  useEffect(() => {
+    if (isLoading) {
+      const timer = setTimeout(() => {
+        setShowLoader(true);
+      }, loaderDelay);
+
+      return () => clearTimeout(timer);
+    } else {
+      setShowLoader(false);
+    }
+  }, [isLoading, loaderDelay]);
+
   return (
     <ButtonStyled
       className={className}
       version={version}
       onClick={onClick}
-      disabled={disabled}
+      disabled={disabled || isLoading}
     >
-      <span>{label}</span>
-      <div className="icon">{Icon && Icon}</div>
+      {!showLoader && <span>{label}</span>}
+      <div className="icon">
+        {showLoader ? (
+          LoadingIcon ? (
+            <LoadingIconStyled>{LoadingIcon}</LoadingIconStyled>
+          ) : (
+            <Spinner />
+          )
+        ) : (
+          Icon && Icon
+        )}
+      </div>
     </ButtonStyled>
   );
 }
@@ -34,6 +66,32 @@ export default function Button({
 type ButtonStyledPropsType = {
   version: ButtonVersionType;
 };
+
+const spin = keyframes`
+  0% { 
+    transform: rotate(0deg); 
+  }
+  100% { 
+    transform: rotate(360deg); 
+  }
+`;
+
+const LoadingIconStyled = styled.div`
+  animation: ${spin} 1s linear infinite;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const SpinnerStyled = styled.div`
+  width: 16px;
+  height: 16px;
+  border: 2px solid transparent;
+  border-top: 2px solid currentColor;
+  border-radius: 50%;
+  animation: ${spin} 1s linear infinite;
+`;
 
 const ButtonStyled = styled.button<ButtonStyledPropsType>`
   ${({ version }) => extraStyle[version]};

@@ -1,6 +1,7 @@
 import styled, { css } from "styled-components";
 import { theme } from "@/theme/theme";
 import { ComponentProps, useState } from "react";
+import { ClipLoader } from "react-spinners";
 
 type ButtonVersionType = "normal" | "success";
 
@@ -21,16 +22,24 @@ export default function Button({
   disabled,
   isLoading = false,
 }: ButtonType) {
+  const [isHovered, setIsHovered] = useState(false);
   return (
     <ButtonStyled
       className={className}
       version={version}
       onClick={onClick}
-      disabled={disabled || isLoading}
+      disabled={disabled}
       isLoading={isLoading}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
       {isLoading ? (
-        <span className="loader">Loading...</span>
+        <span className="loader">
+          <ClipLoader
+            color={isHovered ? theme.colors.primary : theme.colors.white}
+            size={theme.fonts.size.XS}
+          />
+        </span>
       ) : (
         <>
           <span>{label}</span>

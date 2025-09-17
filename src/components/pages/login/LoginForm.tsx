@@ -8,15 +8,35 @@ import Button from "@/components/reusable-ui/Button";
 import { theme } from "@/theme/theme";
 import { authenticateUser } from "@/api/user";
 import Welcome from "./Welcome";
+import * as z from "zod";
+
+const UsernameSchema = z
+  .string()
+  .nonempty({ message: "Veuillez entrer un prénom" })
+  .min(2, { message: "Le prénom doit contenir au moins 2 caractères." })
+  .max(20, { message: "Le prénom ne peut pas dépasser 20 caractères." })
+  .regex(/^[A-Za-zÀ-ÖØ-öø-ÿ-]+$/, {
+    message: "Le prénom ne doit contenir que des lettres ou -",
+  });
 
 export default function LoginForm() {
   // state
   const [username, setUsername] = useState<string>("");
   const navigate = useNavigate();
+  const [hasError, setHasError] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string>("");
 
   // comportements
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    const result = UsernameSchema.safeParse(username);
+    if (!result.success) {
+      setHasError(true);
+      setErrorMessage(result.error.issues[0].message);
+      return;
+    }
+    setHasError(false);
+    setErrorMessage("");
 
     const userReceived = await authenticateUser(username);
 
@@ -26,6 +46,11 @@ export default function LoginForm() {
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUsername(event.target.value);
+    //Pour effacer l'erreur lorsque l'utilisateur tape dans le champ
+    if (hasError) {
+      setHasError(false);
+      setErrorMessage("");
+    }
   };
 
   // affichage
@@ -37,12 +62,11 @@ export default function LoginForm() {
           value={username}
           onChange={handleChange}
           placeholder={"Entrez votre prénom"}
-          required
           Icon={<BsPersonCircle />}
           className="input-login"
           version="normal"
         />
-
+        <span className="error">{errorMessage}</span>
         <Button label={"Accéder à mon espace"} Icon={<IoChevronForward />} />
       </div>
     </LoginFormStyled>
@@ -76,5 +100,8 @@ const LoginFormStyled = styled.form`
 
   .input-login {
     margin: 18px 0; // must be handled in Parent
+  }
+  .error {
+    color: red;
   }
 `;

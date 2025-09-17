@@ -27,6 +27,7 @@ export default function Button({
     >
       <span>{label}</span>
       <div className="icon">{Icon && Icon}</div>
+      <span className="loader">loader</span>
     </ButtonStyled>
   );
 }

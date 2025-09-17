@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 import { theme } from "@/theme/theme";
-import { ComponentProps } from "react";
+import { ComponentProps, useState } from "react";
 
 type ButtonVersionType = "normal" | "success";
 
@@ -8,6 +8,8 @@ type ButtonType = {
   Icon?: JSX.Element;
   version?: ButtonVersionType;
   label: string;
+  isLoading?: boolean;
+  setIsLoading?: React.Dispatch<React.SetStateAction<boolean>>;
 } & ComponentProps<"button">;
 
 export default function Button({
@@ -17,23 +19,31 @@ export default function Button({
   version = "normal",
   onClick,
   disabled,
+  isLoading = false,
 }: ButtonType) {
   return (
     <ButtonStyled
       className={className}
       version={version}
       onClick={onClick}
-      disabled={disabled}
+      disabled={disabled || isLoading}
+      isLoading={isLoading}
     >
-      <span>{label}</span>
-      <div className="icon">{Icon && Icon}</div>
-      <span className="loader">loader</span>
+      {isLoading ? (
+        <span className="loader">Loading...</span>
+      ) : (
+        <>
+          <span>{label}</span>
+          <div className="icon">{Icon && Icon}</div>
+        </>
+      )}
     </ButtonStyled>
   );
 }
 
 type ButtonStyledPropsType = {
   version: ButtonVersionType;
+  isLoading: boolean;
 };
 
 const ButtonStyled = styled.button<ButtonStyledPropsType>`

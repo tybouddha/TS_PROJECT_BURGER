@@ -6,6 +6,7 @@ import { initialiseUserSession } from "./helpers/initialiseUserSession";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useOrderContext } from "@/context/OrderContext";
+import AdminShortcut from "./AdminShortcut";
 
 export default function OrderPage() {
   // state
@@ -19,6 +20,7 @@ export default function OrderPage() {
   //affichage (render)
   return (
     <OrderPageStyled>
+      <AdminShortcut className="shortcut" />
       <div className="container">
         <Navbar />
         <Main />
@@ -30,9 +32,18 @@ export default function OrderPage() {
 const OrderPageStyled = styled.div`
   background: ${theme.colors.primary};
   height: 100vh;
+  .shortcut {
+    /* border: 3px solid blue; */
+    position: absolute;
+    z-index: 10;
+    top: 10px;
+    left: 10px;
+  }
   display: flex;
   justify-content: center;
   align-items: center;
+  border: 10px solid red;
+  position: relative;
 
   .container {
     background: red;

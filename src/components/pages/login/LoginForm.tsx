@@ -58,15 +58,17 @@ export default function LoginForm() {
     <LoginFormStyled action="submit" onSubmit={handleSubmit}>
       <Welcome />
       <div>
-        <TextInput
-          value={username}
-          onChange={handleChange}
-          placeholder={"Entrez votre prénom"}
-          Icon={<BsPersonCircle />}
-          className="input-login"
-          version="normal"
-        />
-        <span className="error">{errorMessage}</span>
+        <div className="input-container">
+          <TextInput
+            value={username}
+            onChange={handleChange}
+            placeholder={"Entrez votre prénom"}
+            Icon={<BsPersonCircle />}
+            className="input-login"
+            version="normal"
+          />
+          <span className="error">{errorMessage}</span>
+        </div>
         <Button label={"Accéder à mon espace"} Icon={<IoChevronForward />} />
       </div>
     </LoginFormStyled>
@@ -98,10 +100,19 @@ const LoginFormStyled = styled.form`
     font-size: ${theme.fonts.size.P4};
   }
 
+  .input-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
   .input-login {
     margin: 18px 0; // must be handled in Parent
   }
   .error {
     color: red;
+    font-size: ${theme.fonts.size.P0};
+    font-family: ${theme.fonts.family.openSans};
+    margin-bottom: 18px;
   }
 `;

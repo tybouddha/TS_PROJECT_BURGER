@@ -11,7 +11,7 @@ import AdminShortcut from "./AdminShortcut";
 export default function OrderPage() {
   // state
   const { username } = useParams();
-  const { setMenu, setBasket } = useOrderContext();
+  const { setMenu, setBasket, isModeAdmin } = useOrderContext();
 
   useEffect(() => {
     if (username) initialiseUserSession(username, setMenu, setBasket);
@@ -20,7 +20,7 @@ export default function OrderPage() {
   //affichage (render)
   return (
     <OrderPageStyled>
-      <AdminShortcut className="shortcut" />
+      {isModeAdmin ? <AdminShortcut className="shortcut" /> : null}
       <div className="container">
         <Navbar />
         <Main />

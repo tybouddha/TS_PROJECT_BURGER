@@ -44,6 +44,7 @@ export default function OrderPage() {
       {isModeAdmin && isAdminShortcutVisible ? (
         <AdminShortcut className="shortcut" onHide={handleHideShortcut} />
       ) : null}
+      <AdminShortcut className="shortcut" />
       <div className="container">
         <Navbar />
         <Main />
@@ -65,6 +66,7 @@ const OrderPageStyled = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  border: 10px solid red;
   position: relative;
 
   .container {

@@ -53,7 +53,7 @@ export default function OrderPage() {
 }
 
 const OrderPageStyled = styled.div`
-  background: ${theme.colors.primary};
+  background: ${theme.colors.greyBlue};
   height: 100vh;
   .shortcut {
     /* border: 3px solid blue; */

@@ -9,7 +9,7 @@ type LogoPropsType = {
 export default function Logo({ className, onClick }: LogoPropsType) {
   return (
     <LogoStyled className={className} onClick={onClick}>
-      <h1>CRAZEE</h1>
+      <h1>GROOVY</h1>
       <img src="/images/logo-orange.png" alt="logo-crazee-burger" />
       <h1>BURGER</h1>
     </LogoStyled>

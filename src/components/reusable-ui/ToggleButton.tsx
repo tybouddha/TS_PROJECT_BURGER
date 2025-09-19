@@ -10,9 +10,9 @@ type ToggleButtonPropsType = {
 
 export default function ToggleButton({
   isChecked,
-  onToggle,
   labelIfChecked = "Fermer",
   labelIfUnchecked = "Ouvrir",
+  onToggle,
 }: ToggleButtonPropsType) {
   return (
     <ToggleButtonStyled>

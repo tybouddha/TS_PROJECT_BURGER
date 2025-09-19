@@ -3,15 +3,19 @@ import styled from "styled-components";
 
 type AdminShortcutPropsType = {
   className?: string;
+  onHide?: React.MouseEventHandler<HTMLButtonElement>;
 };
 
-export default function AdminShortcut({ className }: AdminShortcutPropsType) {
+export default function AdminShortcut({
+  className,
+  onHide,
+}: AdminShortcutPropsType) {
   return (
     <AdminShortcutStyled className={className}>
       <span>Pour aller plus vite:</span>
       <span>ctrl + i: Toggle "mode" admin</span>
       <span>ctrl + j: Toggle "panel" admin</span>
-      <button>Ne plus afficher</button>
+      <button onClick={onHide}>Ne plus afficher</button>
     </AdminShortcutStyled>
   );
 }

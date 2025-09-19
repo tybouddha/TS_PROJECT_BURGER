@@ -3,7 +3,7 @@ import { theme } from "@/theme/theme";
 import Main from "./Main/Main";
 import Navbar from "./Navbar/Navbar";
 import { initialiseUserSession } from "./helpers/initialiseUserSession";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useOrderContext } from "@/context/OrderContext";
 import AdminShortcut from "./AdminShortcut";
@@ -11,16 +11,29 @@ import AdminShortcut from "./AdminShortcut";
 export default function OrderPage() {
   // state
   const { username } = useParams();
-  const { setMenu, setBasket, isModeAdmin } = useOrderContext();
+  const { setMenu, setBasket, isModeAdmin, isToggleHovered } =
+    useOrderContext();
+  const [isAdminShortcutVisible, setIsAdminShortcutVisible] = useState(false);
 
   useEffect(() => {
     if (username) initialiseUserSession(username, setMenu, setBasket);
   }, [username, setMenu, setBasket]);
 
+  useEffect(() => {
+    if (isToggleHovered) {
+      setIsAdminShortcutVisible(true);
+    }
+  }, [isToggleHovered]);
+
   //affichage (render)
   return (
     <OrderPageStyled>
-      {isModeAdmin ? <AdminShortcut className="shortcut" /> : null}
+      {isModeAdmin && isToggleHovered ? (
+        <AdminShortcut
+          className="shortcut"
+          onHide={() => setIsAdminShortcutVisible(false)}
+        />
+      ) : null}
       <div className="container">
         <Navbar />
         <Main />

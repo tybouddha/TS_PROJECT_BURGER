@@ -38,6 +38,8 @@ type OrderContextType = {
     username: string
   ) => void;
   handleProductSelected: (idProductClicked: string) => Promise<void>;
+  isToggleHovered: boolean;
+  setIsToggleHovered: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 // 1. Création du context
@@ -57,6 +59,7 @@ export const OrderContextProvider = ({ children }: PropsWithChildren) => {
     useMenu();
   const { basket, setBasket, handleAddToBasket, handleDeleteBasketProduct } =
     useBasket();
+  const [isToggleHovered, setIsToggleHovered] = useState(false);
 
   const handleProductSelected = async (idProductClicked: string) => {
     if (!isModeAdmin || !menu) return;
@@ -92,6 +95,8 @@ export const OrderContextProvider = ({ children }: PropsWithChildren) => {
     handleAddToBasket,
     handleDeleteBasketProduct,
     handleProductSelected,
+    isToggleHovered,
+    setIsToggleHovered,
   };
 
   return (

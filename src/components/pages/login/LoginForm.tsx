@@ -75,9 +75,10 @@ export default function LoginForm() {
           <span className="error">{errorMessage}</span>
         </div>
         <Button
-          isLoading={isLoading}
           label={"Accéder à mon espace"}
           Icon={<IoChevronForward />}
+          isLoading={isLoading}
+
         />
       </div>
     </LoginFormStyled>

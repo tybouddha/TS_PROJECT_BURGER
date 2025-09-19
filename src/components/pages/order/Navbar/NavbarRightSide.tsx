@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import { useOrderContext } from "@/context/OrderContext";
 
 export default function NavbarRightSide() {
-  const { isModeAdmin, setIsModeAdmin } = useOrderContext();
+  const { isModeAdmin, setIsModeAdmin, setIsToggleHovered } = useOrderContext();
 
   const displayToastNotification = () => {
     if (!isModeAdmin) {
@@ -27,12 +27,17 @@ export default function NavbarRightSide() {
 
   return (
     <NavbarRightSideStyled>
-      <ToggleButton
-        isChecked={isModeAdmin}
-        labelIfUnchecked="ACTIVER LE MODE ADMIN"
-        labelIfChecked="DÉSACTIVER LE MODE ADMIN"
-        onToggle={displayToastNotification}
-      />
+      <div
+        onMouseEnter={() => setIsToggleHovered(true)}
+        onMouseLeave={() => setIsToggleHovered(false)}
+      >
+        <ToggleButton
+          isChecked={isModeAdmin}
+          labelIfUnchecked="ACTIVER LE MODE ADMIN"
+          labelIfChecked="DÉSACTIVER LE MODE ADMIN"
+          onToggle={displayToastNotification}
+        />
+      </div>
       <Profile />
       <ToastAdmin />
     </NavbarRightSideStyled>

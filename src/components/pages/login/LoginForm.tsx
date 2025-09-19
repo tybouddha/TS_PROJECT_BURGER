@@ -13,15 +13,20 @@ export default function LoginForm() {
   // state
   const [username, setUsername] = useState<string>("");
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   // comportements
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    setIsLoading(true);
+
     const userReceived = await authenticateUser(username);
 
-    setUsername("");
-    navigate(`order/${userReceived.username}`);
+    setTimeout(() => {
+      setUsername("");
+      navigate(`order/${userReceived.username}`);
+    }, 3000);
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -43,7 +48,11 @@ export default function LoginForm() {
           version="normal"
         />
 
-        <Button label={"Accéder à mon espace"} Icon={<IoChevronForward />} />
+        <Button
+          label={"Accéder à mon espace"}
+          Icon={<IoChevronForward />}
+          isLoading={isLoading}
+        />
       </div>
     </LoginFormStyled>
   );

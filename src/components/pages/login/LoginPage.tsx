@@ -18,10 +18,11 @@ const LoginPageStyled = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  position: relative;
 
   ::before {
     content: "";
-    background: url("/images/burger-right.jpg") rgba(0, 0, 0, 0.4);
+    background: url("/images/burger-right.jpg") rgba(0, 0, 0, 0.3);
     background-size: cover;
     background-position: center;
     background-blend-mode: darken;
@@ -34,11 +35,12 @@ const LoginPageStyled = styled.div`
     z-index: -1;
   }
   .left-side {
-    width: 50%;
-    display: flex;
+    position: relative;
+    right: 350px;
+    /* display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: center; */
   }
 
   .logo-login-page {

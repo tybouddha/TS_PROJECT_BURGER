@@ -1,5 +1,6 @@
 import { theme } from "@/theme/theme";
 import styled from "styled-components";
+import { useEffect, useState } from "react";
 
 type AdminShortcutPropsType = {
   className?: string;
@@ -10,11 +11,21 @@ export default function AdminShortcut({
   className,
   onHide,
 }: AdminShortcutPropsType) {
+  const [shortcutKey, setShortcutKey] = useState("Ctrl");
+
+  useEffect(() => {
+    if (navigator.userAgent.includes("Mac")) {
+      setShortcutKey("Cmd");
+    } else {
+      setShortcutKey("Ctrl");
+    }
+  }, []);
+
   return (
     <AdminShortcutStyled className={className}>
       <span>Pour aller plus vite:</span>
-      <span>ctrl + i: Toggle "mode" admin</span>
-      <span>ctrl + j: Toggle "panel" admin</span>
+      <span>{shortcutKey} + i : Toggle "mode" admin</span>
+      <span>{shortcutKey} + j : Toggle "panel" admin</span>
       <button onClick={onHide}>Ne plus afficher</button>
     </AdminShortcutStyled>
   );

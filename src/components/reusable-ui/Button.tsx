@@ -28,7 +28,7 @@ export default function Button({
       className={className}
       version={version}
       onClick={onClick}
-      disabled={disabled}
+      disabled={isLoading}
       isLoading={isLoading}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -62,7 +62,7 @@ const ButtonStyled = styled.button<ButtonStyledPropsType>`
 const extraStyleNormal = css`
   width: 100%;
   border: 1px solid red;
-  display: inline-flex;
+  display: flex;
   justify-content: center;
   align-items: center;
   position: relative; //is used in case you want to create interactive icons where an icon replaces the text label.
@@ -91,7 +91,6 @@ const extraStyleNormal = css`
   }
 
   &:disabled {
-    opacity: 50%;
     cursor: not-allowed;
     z-index: 2;
   }

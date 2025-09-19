@@ -18,12 +18,13 @@ export default function LoginForm() {
   // comportements
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
     setIsLoading(true);
+
     const userReceived = await authenticateUser(username);
-    setUsername("");
-    setIsLoading(true);
+
     setTimeout(() => {
-      setIsLoading(false);
+      setUsername("");
       navigate(`order/${userReceived.username}`);
     }, 3000);
   };

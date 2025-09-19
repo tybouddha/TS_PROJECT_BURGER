@@ -1,6 +1,7 @@
 import styled, { css } from "styled-components";
 import { theme } from "@/theme/theme";
-import { ComponentProps } from "react";
+import { ComponentProps, useState } from "react";
+import { ClipLoader } from "react-spinners";
 
 type ButtonVersionType = "normal" | "success";
 
@@ -8,6 +9,8 @@ type ButtonType = {
   Icon?: JSX.Element;
   version?: ButtonVersionType;
   label: string;
+  isLoading?: boolean;
+  setIsLoading?: React.Dispatch<React.SetStateAction<boolean>>;
 } & ComponentProps<"button">;
 
 export default function Button({
@@ -17,22 +20,39 @@ export default function Button({
   version = "normal",
   onClick,
   disabled,
+  isLoading = false,
 }: ButtonType) {
+  const [isHovered, setIsHovered] = useState(false);
   return (
     <ButtonStyled
       className={className}
       version={version}
       onClick={onClick}
-      disabled={disabled}
+      disabled={isLoading}
+      isLoading={isLoading}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
-      <span>{label}</span>
-      <div className="icon">{Icon && Icon}</div>
+      {isLoading ? (
+        <span className="loader">
+          <ClipLoader
+            color={isHovered ? theme.colors.primary : theme.colors.white}
+            size={theme.fonts.size.XS}
+          />
+        </span>
+      ) : (
+        <>
+          <span>{label}</span>
+          <div className="icon">{Icon && Icon}</div>
+        </>
+      )}
     </ButtonStyled>
   );
 }
 
 type ButtonStyledPropsType = {
   version: ButtonVersionType;
+  isLoading: boolean;
 };
 
 const ButtonStyled = styled.button<ButtonStyledPropsType>`
@@ -42,7 +62,7 @@ const ButtonStyled = styled.button<ButtonStyledPropsType>`
 const extraStyleNormal = css`
   width: 100%;
   border: 1px solid red;
-  display: inline-flex;
+  display: flex;
   justify-content: center;
   align-items: center;
   position: relative; //is used in case you want to create interactive icons where an icon replaces the text label.
@@ -71,7 +91,6 @@ const extraStyleNormal = css`
   }
 
   &:disabled {
-    opacity: 50%;
     cursor: not-allowed;
     z-index: 2;
   }

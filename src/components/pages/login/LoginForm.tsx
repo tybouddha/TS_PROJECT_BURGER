@@ -23,8 +23,14 @@ export default function LoginForm() {
   // state
   const [username, setUsername] = useState<string>("");
   const navigate = useNavigate();
+
   const [hasError, setHasError] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+    
+
+ 
+
 
   // comportements
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -38,10 +44,14 @@ export default function LoginForm() {
     setHasError(false);
     setErrorMessage("");
 
+    setIsLoading(true);
+
     const userReceived = await authenticateUser(username);
 
-    setUsername("");
-    navigate(`order/${userReceived.username}`);
+    setTimeout(() => {
+      setUsername("");
+      navigate(`order/${userReceived.username}`);
+    }, 3000);
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -58,6 +68,7 @@ export default function LoginForm() {
     <LoginFormStyled action="submit" onSubmit={handleSubmit}>
       <Welcome />
       <div>
+
         <div className="input-container">
           <TextInput
             value={username}
@@ -69,7 +80,10 @@ export default function LoginForm() {
           />
           <span className="error">{errorMessage}</span>
         </div>
-        <Button label={"Accéder à mon espace"} Icon={<IoChevronForward />} />
+        <Button isLoading={isLoading} label={"Accéder à mon espace"} Icon={<IoChevronForward />} />
+
+    
+
       </div>
     </LoginFormStyled>
   );

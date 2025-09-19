@@ -38,12 +38,13 @@ export default function LoginForm() {
     }
     setHasError(false);
     setErrorMessage("");
+
     setIsLoading(true);
+
     const userReceived = await authenticateUser(username);
-    setUsername("");
-    setIsLoading(true);
+
     setTimeout(() => {
-      setIsLoading(false);
+      setUsername("");
       navigate(`order/${userReceived.username}`);
     }, 3000);
   };

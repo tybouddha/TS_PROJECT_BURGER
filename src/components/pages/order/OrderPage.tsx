@@ -14,25 +14,30 @@ export default function OrderPage() {
   const { setMenu, setBasket, isModeAdmin, isToggleHovered } =
     useOrderContext();
   const [isAdminShortcutVisible, setIsAdminShortcutVisible] = useState(false);
+  const ADMIN_SHORTCUT_HIDDEN_KEY = "adminShortcutHidden";
 
   useEffect(() => {
     if (username) initialiseUserSession(username, setMenu, setBasket);
   }, [username, setMenu, setBasket]);
 
   useEffect(() => {
-    if (isToggleHovered) {
+    const isHidden = localStorage.getItem(ADMIN_SHORTCUT_HIDDEN_KEY) === "true";
+
+    if (isToggleHovered && isModeAdmin && !isHidden) {
       setIsAdminShortcutVisible(true);
     }
-  }, [isToggleHovered]);
+  }, [isToggleHovered, isModeAdmin]);
+
+  const handleHideShortcut = () => {
+    setIsAdminShortcutVisible(false);
+    localStorage.setItem(ADMIN_SHORTCUT_HIDDEN_KEY, "true");
+  };
 
   //affichage (render)
   return (
     <OrderPageStyled>
-      {isModeAdmin && isToggleHovered ? (
-        <AdminShortcut
-          className="shortcut"
-          onHide={() => setIsAdminShortcutVisible(false)}
-        />
+      {isModeAdmin && isAdminShortcutVisible ? (
+        <AdminShortcut className="shortcut" onHide={handleHideShortcut} />
       ) : null}
       <div className="container">
         <Navbar />
@@ -55,7 +60,6 @@ const OrderPageStyled = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 10px solid red;
   position: relative;
 
   .container {

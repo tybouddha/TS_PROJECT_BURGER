@@ -1,6 +1,7 @@
 import { theme } from "@/theme/theme";
 import styled from "styled-components";
 import { useEffect, useState } from "react";
+import { IoBulbSharp } from "react-icons/io5";
 
 type AdminShortcutPropsType = {
   className?: string;
@@ -23,7 +24,10 @@ export default function AdminShortcut({
 
   return (
     <AdminShortcutStyled className={className}>
-      <span>Pour aller plus vite:</span>
+      <span>
+        <IoBulbSharp />
+        Pour aller plus vite:
+      </span>
       <span>{shortcutKey} + i : Toggle "mode" admin</span>
       <span>{shortcutKey} + j : Toggle "panel" admin</span>
       <button onClick={onHide}>Ne plus afficher</button>

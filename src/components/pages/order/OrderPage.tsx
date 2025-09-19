@@ -11,10 +11,15 @@ import AdminShortcut from "./AdminShortcut";
 export default function OrderPage() {
   // state
   const { username } = useParams();
-  const { setMenu, setBasket, isModeAdmin, isToggleHovered } =
+  const { setMenu, setBasket, isModeAdmin, setIsModeAdmin, isToggleHovered } =
     useOrderContext();
+
   const [isAdminShortcutVisible, setIsAdminShortcutVisible] = useState(false);
   const ADMIN_SHORTCUT_HIDDEN_KEY = "adminShortcutHidden";
+
+  useEffect(() => {
+    setIsModeAdmin(false);
+  }, [username, setIsModeAdmin]);
 
   useEffect(() => {
     if (username) initialiseUserSession(username, setMenu, setBasket);

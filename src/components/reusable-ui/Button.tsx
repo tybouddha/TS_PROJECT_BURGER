@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 import { theme } from "@/theme/theme";
 import { ComponentProps, useState } from "react";
-import { ClipLoader } from "react-spinners";
+import { BiLoader } from "react-icons/bi";
 
 type ButtonVersionType = "normal" | "success";
 
@@ -35,7 +35,7 @@ export default function Button({
     >
       {isLoading ? (
         <span className="loader">
-          <ClipLoader
+          <BiLoader
             color={isHovered ? theme.colors.primary : theme.colors.white}
             size={theme.fonts.size.XS}
           />

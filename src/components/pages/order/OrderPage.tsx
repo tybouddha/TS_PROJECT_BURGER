@@ -19,6 +19,8 @@ export default function OrderPage() {
 
   useEffect(() => {
     setIsModeAdmin(false);
+    //reinit local storage si on change d'utilisateur
+    localStorage.removeItem(ADMIN_SHORTCUT_HIDDEN_KEY);
   }, [username, setIsModeAdmin]);
 
   useEffect(() => {
@@ -30,6 +32,9 @@ export default function OrderPage() {
 
     if (isToggleHovered && isModeAdmin && !isHidden) {
       setIsAdminShortcutVisible(true);
+    }
+    if (!isModeAdmin) {
+      setIsAdminShortcutVisible(false);
     }
   }, [isToggleHovered, isModeAdmin]);
 
@@ -44,7 +49,7 @@ export default function OrderPage() {
       {isModeAdmin && isAdminShortcutVisible ? (
         <AdminShortcut className="shortcut" onHide={handleHideShortcut} />
       ) : null}
-      <AdminShortcut className="shortcut" />
+      {/* <AdminShortcut className="shortcut" /> */}
       <div className="container">
         <Navbar />
         <Main />
@@ -57,7 +62,6 @@ const OrderPageStyled = styled.div`
   background: ${theme.colors.greyBlue};
   height: 100vh;
   .shortcut {
-    /* border: 3px solid blue; */
     position: absolute;
     z-index: 10;
     top: 10px;
@@ -66,11 +70,9 @@ const OrderPageStyled = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 10px solid red;
   position: relative;
 
   .container {
-    background: red;
     height: 95vh;
     width: 1400px;
     display: flex;

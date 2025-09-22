@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 import { theme } from "@/theme/theme";
 import { ComponentProps, useState } from "react";
-import { BiLoader } from "react-icons/bi";
+import { BiLoaderAlt } from "react-icons/bi";
 
 type ButtonVersionType = "normal" | "success";
 
@@ -35,10 +35,7 @@ export default function Button({
     >
       {isLoading ? (
         <span className="loader">
-          <BiLoader
-            color={isHovered ? theme.colors.primary : theme.colors.white}
-            size={theme.fonts.size.XS}
-          />
+          <BiLoaderAlt className="icon-loader" />
         </span>
       ) : (
         <>
@@ -69,6 +66,7 @@ const extraStyleNormal = css`
   white-space: nowrap; //prevents the text label from wrapping to the next line.
   text-decoration: none; //removes the text decoration in case you’re applying the .btn class to a link.
   line-height: 1;
+  height: 55px;
 
   padding: 18px 24px;
   border-radius: 5px;
@@ -84,6 +82,10 @@ const extraStyleNormal = css`
     background-color: ${theme.colors.white};
     border: 1px solid ${theme.colors.primary};
     transition: all 200ms ease-out;
+
+    .icon-loader {
+      color: ${theme.colors.primary};
+    }
   }
   :active {
     background-color: ${theme.colors.primary};
@@ -114,6 +116,21 @@ const extraStyleNormal = css`
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+
+  .icon-loader {
+    color: ${theme.colors.white};
+    font-size: ${theme.fonts.size.P3};
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
   }
 `;
 

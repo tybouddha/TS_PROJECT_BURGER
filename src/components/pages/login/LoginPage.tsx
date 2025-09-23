@@ -38,9 +38,8 @@ const LoginPageStyled = styled.div`
     position: relative;
     right: 350px;
     display: flex;
-    flex-direct;
+    flex-direction: column;
     justify-content: center;
-
 
     align-items: center;
   }

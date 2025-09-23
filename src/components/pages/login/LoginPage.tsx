@@ -37,10 +37,9 @@ const LoginPageStyled = styled.div`
   .left-side {
     position: relative;
     right: 350px;
-    /* display: flex;
+    display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center; */
+    align-items: center;
   }
 
   .logo-login-page {
